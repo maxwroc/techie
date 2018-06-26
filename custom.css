@@ -38,6 +38,19 @@ body {
     background: #646464 url("images/body_pattern.png") repeat top left;
 }
 
+#version {
+    display: flex;
+    align-items: baseline;
+    text-decoration: none;
+    padding: 0 20px;
+}
+#version img { /* Domoticz logo */
+    display: none;
+}
+#version #appversion {
+    margin-left: 10px;
+}
+
 .navbar-inverse .navbar-inner {
     background-image: url("images/bg_header.png");
     background-repeat: repeat;
@@ -88,6 +101,7 @@ body {
     font-weight: normal;
     position: relative;
     top: 10px;
+    margin-right: 5px;
 }
 
 .navbar #cDashboard:before {
@@ -115,6 +129,9 @@ body {
     content: "\e918";
 }
 
+.bannercontent {
+    padding-top: 70px;
+}
 
 
 @media (max-width: 979px) and (min-width: 768px) {
@@ -149,67 +166,163 @@ body {
         margin: 0 0 15px 0;
     }
 }
+@media (max-width: 1200px) {
+    .navbar .hidden-tablet {
+        display: none;
+    }
+    .row .span4 {
+        padding: 5px 0;
+    }
+}
 
-
+@media (min-width: 1200px) {
+    #holder .span4 {
+        width: 378px;
+    }
+}
 
 /* #### Items  #### */
 
-body table#itemtable tbody tr,
-body table#itemtablenotype tbody tr,
-body table#itemtabledoubleicon tbody tr,
-body table#itemtablenostatus tbody tr,
-body table#itemtablesmall tbody tr {
+body table#itemtable *,
+body table#itemtablenotype *,
+body table#itemtabledoubleicon *,
+body table#itemtablenostatus *,
+body table#itemtablesmall * {
+    box-sizing: border-box;
+}
+
+body table#itemtable tr,
+body table#itemtablenotype tr,
+body table#itemtabledoubleicon tr,
+body table#itemtablenostatus tr,
+body table#itemtablesmall tr {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+body table#itemtable,
+body table#itemtablenotype,
+body table#itemtabledoubleicon,
+body table#itemtablenostatus,
+body table#itemtablesmall {
     box-shadow: 5px 5px 10px #333333;
     border-radius: 10px 10px 5px 5px; /* remove white lines on top corners */
     padding: 0 0 5px;
     position: relative; /* to position the last TD on the bottom right */
     width: 100%;
+    background-color: #e7e7e7;
+    color: #000;
+    transition: background-color 200ms linear;
 }
+
+body table#itemtable:hover,
+body table#itemtablenotype:hover,
+body table#itemtabledoubleicon:hover,
+body table#itemtablenostatus:hover,
+body table#itemtablesmall:hover {
+    background-color: #fff;
+    transition: background-color 200ms linear;
+}
+
 body table#itemtablesmall tbody tr {
     height: 70px;
 }
-body table#itemtable tr td:first-child, /* title */
-body table#itemtablenotype tr td:first-child,
-body table#itemtabledoubleicon tr td:first-child,
-body table#itemtablenostatus tr td:first-child,
-body table#itemtablesmall tr td:first-child {
+body table#itemtable tr td#name, /* title */
+body table#itemtablenotype tr td#name,
+body table#itemtabledoubleicon tr td#name,
+body table#itemtablenostatus tr td#name,
+body table#itemtablesmall tr td#name {
     background-image: url("images/bg_header.png");
     background-repeat: repeat;
     border: none;
     border-radius: 5px 5px 0 0;
     color: #e7e7e7;
-    padding: 3px 5px;
+    padding: 3px 8px;
     font-size: 120%;
     cursor: pointer;
     overflow: hidden; /* cut too long name */
+    width: 100%;
 }
-body table#itemtable tr:hover td:first-child,
-body table#itemtablenotype tr:hover td:first-child,
-body table#itemtabledoubleicon tr:hover td:first-child,
-body table#itemtablenostatus tr:hover td:first-child,
-body table#itemtablesmall tr:hover td:first-child {
+body table#itemtable tr:hover td#name,
+body table#itemtablenotype tr:hover td#name,
+body table#itemtabledoubleicon tr:hover td#name,
+body table#itemtablenostatus tr:hover td#name,
+body table#itemtablesmall tr:hover td#name {
     color: white;
 }
-body table#itemtable tr td:first-child + td, /* status */
-body table#itemtablenotype tr td:first-child + td,
-body table#itemtabledoubleicon tr td:first-child + td,
-body table#itemtablenostatus tr td:first-child + td,
-body table#itemtablesmall tr td:first-child + td {
+body table#itemtable tr td#bigtext, /* status */
+body table#itemtablenotype tr td#bigtext,
+body table#itemtabledoubleicon tr td#bigtext,
+body table#itemtablenostatus tr td#bigtext,
+body table#itemtablesmall tr td#bigtext {
     color: #FF772D;
     font-weight: normal;
-    padding: 0 5px;
+    padding: 3px 0;
     font-size: 120%;
     position: relative; /* to force stay on top */
     background-color: #252F31; /* hover long text below */
+    position: absolute;
+    right: 8px;
 }
-body table#itemtablesmall tr td:first-child + td + td + td + td { /* last updated */
+
+body table#itemtable tr td#img, /* status */
+body table#itemtablenotype tr td#img,
+body table#itemtabledoubleicon tr td#img,
+body table#itemtablenostatus tr td#img,
+body table#itemtablesmall tr td#img {
+    padding: 5px;
+}
+
+body table#itemtablenotype tr td#lastupdate:before,
+body table#itemtablenostatus tr td#lastupdate:before,
+body table#itemtablenostatus tr td#type:before {
+    font-weight: bold;
+}
+
+body table#itemtablenotype tr td#lastupdate:before,
+body table#itemtablenostatus tr td#lastupdate:before {
+    content: "Last seen: ";
+}
+body table#itemtablenostatus tr td#type:before {
+    content: "Type: ";
+}
+body table#itemtablesmall tr td#lastupdate { /* last updated */
     position: absolute;
     bottom: 5px;
     right: 5px;
 }
-body table#itemtablesmall tr td:first-child + td + td + td + td:before { /* last updated text */
-    display: none;
+
+body table#itemtablenotype tr td#lastupdate,
+body table#itemtablenostatus tr td#lastupdate {
+    order: 1; /* move it after type */
+    margin: -35px 0 0 58px;
 }
+
+body table#itemtablesmall tr td#type,
+body table#itemtablenostatus tr td#type,
+body table#itemtablesmall tr td#status,
+body table#itemtablenotype tr td#status,
+body table#itemtablenostatus tr td#status {
+    padding: 5px 0;
+}
+
+body table#itemtablenotype tr td.options,
+body table#itemtablenostatus tr td.options {
+    order: 2; /* requred to move type before lastupdate */
+}
+
+body table#itemtablenotype tr td.options img,
+body table#itemtablenostatus tr td.options img { /* fav icon */
+    position: absolute;
+    top: 30px;
+    right: 8px;
+}
+
+body table#itemtablenostatus tr td.options .btnsmall {
+    height: unset;
+    padding: 0 5px;
+}
+
 #comboroom {
     background-color: #252F31;
     color: #FF772D;
@@ -218,7 +331,6 @@ body table#itemtablesmall tr td:first-child + td + td + td + td:before { /* last
 @media (min-width: 1200px) {
 
     .row .span4 {
-        margin-left: 32px;
         width: 368px;
     }
     .span4:first-child {
