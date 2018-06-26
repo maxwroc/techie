@@ -1,7 +1,7 @@
 # Domoticz  extensions and themes
 #### Theme Techie ####
 Based on Nibbleblog theme with the same name https://github.com/dignajar/nibbleblog/tree/master/themes/techie
-![Template screenshot](images/screen.png)
+![Domoticz theme Techie screenshot](images/screen.png)
 
 ## Installation
 Go to "styles" directory in your Domoticz location, for example:
